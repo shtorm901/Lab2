@@ -27,34 +27,19 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
         self.pushButton.setObjectName("pushButton")
         self.gridLayout.addWidget(self.pushButton, 0, 0, 1, 1)
-        self.pushButton_2 = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
-        self.pushButton_2.setStyleSheet("QPushButton{\n"
-"background-color:rgb(85, 255, 0)\n"
-"}")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout.addWidget(self.pushButton_2, 0, 1, 1, 1)
+
         self.pushButton_6 = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
         self.pushButton_6.setStyleSheet("QPushButton{\n"
-"background-color:rgb(111, 111, 111)\n"
+"background-color:rgb(200, 0, 0)\n"
 "}")
         self.pushButton_6.setObjectName("pushButton_6")
-        self.gridLayout.addWidget(self.pushButton_6, 1, 2, 1, 1)
-        self.pushButton_3 = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
-        self.pushButton_3.setStyleSheet("QPushButton{\n"
-"background-color:rgb(255, 0, 0)\n"
-"}")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.gridLayout.addWidget(self.pushButton_3, 0, 2, 1, 1)
-        self.pushButton_8 = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
-        self.pushButton_8.setStyleSheet("}")
-        self.pushButton_8.setObjectName("pushButton_8")
-        self.gridLayout.addWidget(self.pushButton_8, 0, 3, 1, 1)
+        self.gridLayout.addWidget(self.pushButton_6, 0, 1, 1, 1)
         self.pushButton_7 = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
         self.pushButton_7.setStyleSheet("QPushButton{\n"
-"background-color:rgb(111, 111, 111)\n"
+"background-color:rgb(0, 200, 0)\n"
 "}")
         self.pushButton_7.setObjectName("pushButton_7")
-        self.gridLayout.addWidget(self.pushButton_7, 1, 1, 1, 1)
+        self.gridLayout.addWidget(self.pushButton_7, 0, 2, 1, 1)
         self.pushButton_4 = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(540, 20, 76, 24))
         self.pushButton_4.setStyleSheet("QPushButton{\n"
@@ -88,32 +73,29 @@ class Ui_MainWindow(object):
 
         def rand():
             random.shuffle(Music)
+            self.listWidget.update()
 
-        def play():
+        def play(item):
             mixer.init()
-            if Music[0] == "Rare - NEFFEX":
+            if item.text() == "Rare - NEFFEX":
                 mixer.music.load("NEFFEX - Rare.mp3")
                 mixer.music.play()
 
-            elif Music[0] == "Hero - Skillet":
+            elif item.text() == "Hero - Skillet":
                 mixer.music.load("Skillet - Hero.mp3")
                 mixer.music.play()
 
-            elif Music[0] == "Gladiator - Jann":
+            elif item.text() == "Gladiator - Jann":
                 mixer.music.load("Jann - Gladiator.mp3")
                 mixer.music.play()
 
-            elif Music[0] == "Fight Back - NEFFEX":
+            elif item.text() == "Fight Back - NEFFEX":
                 mixer.music.load("NEFFEX - Fight Back.mp3")
                 mixer.music.play()
 
-            elif Music[0] == "Feel Invincible - Skillet":
+            elif item.text() == "Feel Invincible - Skillet":
                 mixer.music.load("Skillet - Feel Invincible.mp3")
                 mixer.music.play()
-
-        def stop():
-            mixer.init()
-            mixer.music.stop()
 
         def pause():
             mixer.init()
@@ -123,37 +105,12 @@ class Ui_MainWindow(object):
             mixer.init()
             mixer.music.unpause()
 
-        def next():
-            mixer.init()
-            rand()
-            if Music[1] == "Rare - NEFFEX":
-                mixer.music.load("NEFFEX - Rare.mp3")
-                mixer.music.play()
-
-            elif Music[1] == "Hero - Skillet":
-                mixer.music.load("Skillet - Hero.mp3")
-                mixer.music.play()
-
-            elif Music[1] == "Gladiator - Jann":
-                mixer.music.load("Jann - Gladiator.mp3")
-                mixer.music.play()
-
-            elif Music[1] == "Fight Back - NEFFEX":
-                mixer.music.load("NEFFEX - Fight Back.mp3")
-                mixer.music.play()
-
-            elif Music[1] == "Feel Invincible - Skillet":
-                mixer.music.load("Skillet - Feel Invincible.mp3")
-                mixer.music.play()
-
         self.pushButton.clicked.connect(rand)
-        self.pushButton_2.clicked.connect(play)
-        self.pushButton_3.clicked.connect(stop)
         self.pushButton_4.clicked.connect(on)
         self.pushButton_5.clicked.connect(off)
         self.pushButton_6.clicked.connect(pause)
         self.pushButton_7.clicked.connect(unpause)
-        self.pushButton_8.clicked.connect(next)
+        self.listWidget.itemClicked.connect(play)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -162,10 +119,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Rand"))
-        self.pushButton_2.setText(_translate("MainWindow", "Play"))
         self.pushButton_6.setText(_translate("MainWindow", "Pause"))
-        self.pushButton_3.setText(_translate("MainWindow", "Stop"))
-        self.pushButton_8.setText(_translate("MainWindow", "Next"))
         self.pushButton_7.setText(_translate("MainWindow", "UnPause"))
         self.pushButton_4.setText(_translate("MainWindow", "On"))
         self.pushButton_5.setText(_translate("MainWindow", "Off"))
