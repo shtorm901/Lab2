@@ -34,12 +34,6 @@ class Ui_MainWindow(object):
 "}")
         self.pushButton_6.setObjectName("pushButton_6")
         self.gridLayout.addWidget(self.pushButton_6, 0, 1, 1, 1)
-        self.pushButton_7 = QtWidgets.QPushButton(parent=self.gridLayoutWidget)
-        self.pushButton_7.setStyleSheet("QPushButton{\n"
-"background-color:rgb(0, 200, 0)\n"
-"}")
-        self.pushButton_7.setObjectName("pushButton_7")
-        self.gridLayout.addWidget(self.pushButton_7, 0, 2, 1, 1)
         self.pushButton_4 = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(540, 20, 76, 24))
         self.pushButton_4.setStyleSheet("QPushButton{\n"
@@ -49,12 +43,6 @@ class Ui_MainWindow(object):
         self.listWidget = QtWidgets.QListWidget(parent=self.centralwidget)
         self.listWidget.setGeometry(QtCore.QRect(275, 0, 251, 321))
         self.listWidget.setObjectName("listWidget")
-        self.pushButton_5 = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.pushButton_5.setGeometry(QtCore.QRect(190, 20, 76, 24))
-        self.pushButton_5.setStyleSheet("QPushButton{\n"
-"background-color:rgb(255, 0, 0)\n"
-"}")
-        self.pushButton_5.setObjectName("pushButton_5")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -67,9 +55,15 @@ class Ui_MainWindow(object):
 
         def on():
             self.listWidget.addItems(Music)
+            self.pushButton_4.setText("Off")
+            self.pushButton_4.clicked.disconnect()
+            self.pushButton_4.clicked.connect(off)
 
         def off():
             self.listWidget.clear()
+            self.pushButton_4.setText("On")
+            self.pushButton_4.clicked.disconnect()
+            self.pushButton_4.clicked.connect(on)
 
         def rand():
             random.shuffle(Music)
@@ -100,16 +94,20 @@ class Ui_MainWindow(object):
         def pause():
             mixer.init()
             mixer.music.pause()
+            self.pushButton_6.clicked.disconnect()
+            self.pushButton_6.setText("UnPause")
+            self.pushButton_6.clicked.connect(unpause)
 
         def unpause():
             mixer.init()
             mixer.music.unpause()
+            self.pushButton_6.clicked.disconnect()
+            self.pushButton_6.setText("Pause")
+            self.pushButton_6.clicked.connect(pause)
 
         self.pushButton.clicked.connect(rand)
-        self.pushButton_4.clicked.connect(on)
-        self.pushButton_5.clicked.connect(off)
         self.pushButton_6.clicked.connect(pause)
-        self.pushButton_7.clicked.connect(unpause)
+        self.pushButton_4.clicked.connect(on)
         self.listWidget.itemClicked.connect(play)
 
         self.retranslateUi(MainWindow)
@@ -120,7 +118,5 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Rand"))
         self.pushButton_6.setText(_translate("MainWindow", "Pause"))
-        self.pushButton_7.setText(_translate("MainWindow", "UnPause"))
         self.pushButton_4.setText(_translate("MainWindow", "On"))
-        self.pushButton_5.setText(_translate("MainWindow", "Off"))
 
