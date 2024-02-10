@@ -66,8 +66,9 @@ class Ui_MainWindow(object):
             self.pushButton_4.clicked.connect(on)
 
         def rand():
+            self.listWidget.clear()
+            self.listWidget.addItems(Music)
             random.shuffle(Music)
-            self.listWidget.update()
 
         def play(item):
             mixer.init()
@@ -90,6 +91,7 @@ class Ui_MainWindow(object):
             elif item.text() == "Feel Invincible - Skillet":
                 mixer.music.load("Skillet - Feel Invincible.mp3")
                 mixer.music.play()
+            
 
         def pause():
             mixer.init()
